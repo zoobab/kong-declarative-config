@@ -10,4 +10,6 @@ services:
   plugins:
   - name: request-transformer
     config:
-      remove.headers: X-
+      remove:
+        headers:
+        - x-myfield
