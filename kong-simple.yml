@@ -1,0 +1,9 @@
+_format_version: "1.1"
+
+services:
+- name: mocky
+  url: http://www.mocky.io/v2/5ca725833400002c4876b363
+  routes:
+  - name: mocky
+    paths:
+    - /mocky
