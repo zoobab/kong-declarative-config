@@ -7,7 +7,3 @@ services:
   - name: mocky
     paths:
     - /mocky
-  plugins:
-  - name: request-transformer
-    config:
-      remove.headers: X-myheader
