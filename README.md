@@ -14,6 +14,12 @@ $ ./run.sh simple
 51a27242b26568f9567b8812be8ffeeffb587ea69905f2eccc35f7f3957b1932
 ```
 
+Or with ```docker run```:
+
+```
+$ docker run -d -e KONG_DATABASE=off -e KONG_DECLARATIVE_CONFIG=/etc/kong/kong-simple.yml -v $PWD:/etc/kong -p8000:8000 zoobab/kong:1.1.1-openshift
+```
+
 Then hit the ```/``` endpoint with curl:
 
 ```
