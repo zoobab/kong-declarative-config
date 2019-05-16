@@ -86,3 +86,7 @@ $ ./run.sh transformer
 ```
 
 Repeat the tshark sniffing as before, you should only see one toto passing by.
+
+# Validator
+
+Refer to the other project to see how to validate your kong.yml: https://github.com/zoobab/kong-validator
