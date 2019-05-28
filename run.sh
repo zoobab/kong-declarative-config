@@ -1,8 +1,8 @@
 #!/bin/bash
 
 if [[ "$#" -ne "1" ]] ; then
-    echo "Error, please specify a type of example to load (simple, transformer, withkey)"
-    echo "Usage: $0 simple"
+    echo "Error, please specify a type of example to load (simple, transformer, withkey, monitoring)"
+    echo "Usage: $0 monitoring"
     exit 1
 fi
 

@@ -90,3 +90,60 @@ Repeat the tshark sniffing as before, you should only see one toto passing by.
 # Validator
 
 Refer to the other project to see how to validate your kong.yml: https://github.com/zoobab/kong-validator
+
+# Monitor that you deployed the right version
+
+Run the monitoring example:
+
+```
+$ ./run.sh monitoring
+8565deec2a90eb6c0246b15e31031a4d9835ae1700bdca1a44fc342475a47718
+```
+
+You should be able to curl the ```/version```:
+
+```
+$ curl http://localhost:8000/version
+{"message":"version-abcde"}
+```
+
+In ```kong-monitoring.yml```, I have added an endpoint that is intercepted
+before going to an endpoint which does not exists (http://localhost). This
+```/version``` endpoint just returns a message with string
+```"version-abcde"```:
+
+```
+services:
+- name: version
+  url: http://localhost
+  routes:
+  - name: version
+    paths:
+    - /version
+- name: mocky24
+  url: http://www.mocky.io/v2/5ca725833400002c4876b363
+  routes:
+  - name: mocky24
+    paths:
+    - /mocky24
+
+plugins:
+- name: request-termination
+  service: version
+  config:
+    status_code: 200
+    message: "version-abcde"
+```
+
+You can template that yaml with sed, j2cli, envsubst or your prefered
+templating tool to change that version string, for example with ```j2cli```:
+
+```
+$ pip install j2cli==0.3.8
+$ export MYVERSION="1234e"
+$ j2 kong-monitoring.yml.j2 -o kong-monitoring.yml
+$ ./run.sh monitoring
+$ sleep 5
+$ curl -s http://localhost:8000/version | grep "$MYVERSION"
+$ echo $?
+```
