@@ -1,0 +1,22 @@
+_format_version: "1.1"
+
+services:
+- name: version
+  url: http://localhost
+  routes:
+  - name: version
+    paths:
+    - /version
+- name: mocky24
+  url: http://www.mocky.io/v2/5ca725833400002c4876b363
+  routes:
+  - name: mocky24
+    paths:
+    - /mocky24
+
+plugins:
+- name: request-termination
+  service: version
+  config:
+    status_code: 200
+    message: "version-{{MYVERSION}}"
