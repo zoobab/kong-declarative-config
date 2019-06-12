@@ -148,7 +148,7 @@ $ curl -s http://localhost:8000/version | grep "$MYVERSION"
 $ echo $?
 ```
 
-# Run kong in Kubernetes
+# Run kong in Kubernetes (Openshift in this example)
 
 Just run ```./k8s.sh``` which does the following:
 
