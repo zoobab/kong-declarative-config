@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kong
+  labels:
+    run: kong
+spec:
+  containers:
+  - name: kong
+    image: zoobab/kong:1.1.1-openshift
+    ports:
+    - containerPort: 8000
+      protocol: TCP
+    env:
+    - name: KONG_PROXY_ACCESS_LOG
+      value: "/dev/stdout"
+    - name: KONG_ADMIN_ACCESS_LOG
+      value: "/dev/stdout"
+    - name: KONG_PROXY_ERROR_LOG
+      value: "/dev/stderr"
+    - name: KONG_ADMIN_ERROR_LOG
+      value: "/dev/stderr"
+    - name: KONG_DATABASE
+      value: "off"
+    - name: KONG_DECLARATIVE_CONFIG
+      value: "/etc/kong/kong.yml"
+    volumeMounts:
+    - name: kongconfig
+      mountPath: /etc/kong
+  volumes:
+  - name: kongconfig
+    configMap:
+      name: kongconfig

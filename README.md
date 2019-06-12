@@ -147,3 +147,15 @@ $ sleep 5
 $ curl -s http://localhost:8000/version | grep "$MYVERSION"
 $ echo $?
 ```
+
+# Run kong in Kubernetes
+
+Just run ```./k8s.sh``` which does the following:
+
+```
+kubectl create configmap kongconfig --from-file=conf.d
+kubectl apply -f ./pod.yaml
+kubectl apply -f ./svc.yaml
+```
+
+
