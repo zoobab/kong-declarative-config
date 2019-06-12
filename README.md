@@ -153,9 +153,23 @@ $ echo $?
 Just run ```./k8s.sh``` which does the following:
 
 ```
-kubectl create configmap kongconfig --from-file=conf.d
-kubectl apply -f ./pod.yaml
-kubectl apply -f ./svc.yaml
+$ kubectl create configmap kongconfig --from-file=conf.d
+$ kubectl apply -f ./pod.yaml
+$ kubectl apply -f ./svc.yaml
 ```
 
+You should get a service running:
 
+```
+$ kubectl get svc
+NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+kong         ClusterIP   10.152.183.48   <none>        8000/TCP   10m
+kubernetes   ClusterIP   10.152.183.1    <none>        443/TCP    123d
+```
+
+Try to curl the IP address:
+
+```
+$ curl http://10.152.183.48:8000/
+{"message":"no Route matched with those values"}
+```
