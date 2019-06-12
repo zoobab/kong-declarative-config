@@ -173,3 +173,10 @@ Try to curl the IP address:
 $ curl http://10.152.183.48:8000/
 {"message":"no Route matched with those values"}
 ```
+
+And try to hit ```/mocky```:
+
+```
+$ curl http://10.152.183.48:8000/mocky
+{"test": "HelloWorld"}
+```
